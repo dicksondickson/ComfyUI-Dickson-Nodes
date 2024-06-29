@@ -1,0 +1,14 @@
+[project]
+name = "ComfyUI-Dickson-Nodes"
+description = "A set of custom nodes that I've either written myself or adapted from other authors"
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/dicksondickson/ComfyUI-Dickson-Nodes"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "dicksondickson"
+DisplayName = "ComfyUI-Dickson-Nodes"
+Icon = "https://raw.githubusercontent.com/dicksondickson/ComfyUI-Dickson-Nodes/main/images/icon-400.png"
