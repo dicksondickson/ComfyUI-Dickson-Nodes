@@ -3,8 +3,8 @@
 This is a set of custom nodes that I've either written myself or adapted from other authors for my own convenience.  
 
 
-# Changelog
-7-9-2024: Colormatch node is now 10x faster.  
+# Changelog  
+7-9-2024:    
 
 
 # Nodes  
