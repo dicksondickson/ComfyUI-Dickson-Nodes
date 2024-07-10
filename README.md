@@ -1,9 +1,13 @@
-# Dickson's ComfyUI Custom Nodes Collection
+# Dickson's ComfyUI Custom Nodes Collection  
 
-This is a set of custom nodes that I've either written myself or adapted from other authors for my own convenience.
+This is a set of custom nodes that I've either written myself or adapted from other authors for my own convenience.  
 
 
-# Nodes
+# Changelog
+7-9-2024: Colormatch node is now 10x faster.  
+
+
+# Nodes  
 
 **Color match node**  
 Forked from StableSR as it seems that project is not maintained.  
@@ -16,12 +20,12 @@ Credit to: Aaron Xie / TTPlanet
   
 
 
-# Installation
-Install via ComfyUI Manager ( search for dicksondickson ) or git clone this repo to your comfyui/customnodes folder.
+# Installation  
+Install via ComfyUI Manager ( search for dicksondickson ) or git clone this repo to your comfyui/customnodes folder.  
   
 
 
-# Models Required
+# Models Required  
 TTPlanet/TTPLanet_SDXL_Controlnet_Tile_Realistic.  
 Download all the models and put it into your ComfyUI/models/controlnet folder:  
 [https://huggingface.co/TTPlanet/TTPLanet_SDXL_Controlnet_Tile_Realistic/tree/main](https://huggingface.co/TTPlanet/TTPLanet_SDXL_Controlnet_Tile_Realistic/tree/main)  
@@ -29,9 +33,9 @@ Download all the models and put it into your ComfyUI/models/controlnet folder:
 
   
 
-# Acknowledgment
+# Acknowledgment  
 
-Thanks to [@comfyanonymous](https://github.com/comfyanonymous) [@Dr.Lt.Data](https://github.com/ltdrdata) and other authors for creating and sharing their work.
+Thanks to [@comfyanonymous](https://github.com/comfyanonymous) [@Dr.Lt.Data](https://github.com/ltdrdata) and other authors for creating and sharing their work.  
 
 
 
