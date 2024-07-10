@@ -15,11 +15,11 @@ import cv2
 import numpy as np
 from PIL import Image
 
-#import folder_paths
 
 
 # Color Match
-from .modules.colormatch import adain_color_match, wavelet_color_match
+#from .modules.colormatch import adain_color_match, wavelet_color_match # standard original
+from .modules.colormatch_accelerate import adain_color_match, wavelet_color_match # accelerated
 from .modules.util import pil2tensor, tensor2pil
 
 
@@ -57,7 +57,6 @@ class DicksonColorMatch:
         result_image = color_match_func(tensor2pil(image), tensor2pil(color_ref_image))
         refined_image = pil2tensor(result_image)
         return (refined_image,)
-
 
 
 # ========= TTPlanet ========= #
