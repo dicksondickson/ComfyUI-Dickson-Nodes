@@ -4,7 +4,7 @@ This is a set of custom nodes that I've either written myself or adapted from ot
 
 
 # Changelog  
-7-9-2024:    
+7-9-2024: Accelerate code for ColorMatch node not working on all setups. Reverted back.
 
 
 # Nodes  
