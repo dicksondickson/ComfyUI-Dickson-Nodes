@@ -54,6 +54,7 @@ class DicksonColorMatch:
         color_match_func = (
             wavelet_color_match if color_match_mode == "Wavelet" else adain_color_match
         )
+        print("[DICKSON-NODES] DicksonColorMatch")
         result_image = color_match_func(tensor2pil(image), tensor2pil(color_ref_image))
         refined_image = pil2tensor(result_image)
         return (refined_image,)
