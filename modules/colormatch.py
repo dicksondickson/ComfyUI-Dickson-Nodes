@@ -74,7 +74,6 @@ def wavelet_color_match(target: Image, source: Image):
 
 
 # Function to calculate mean and standard deviation of a tensor
-#@torch.jit.script  # This decorator enables JIT compilation for faster execution
 def calc_mean_std(feat: Tensor, eps=1e-5):
     """
     Calculate mean and std for adaptive_instance_normalization.
@@ -94,7 +93,6 @@ def calc_mean_std(feat: Tensor, eps=1e-5):
 
 
 # Function for adaptive instance normalization
-#@torch.jit.script
 def adaptive_instance_normalization(content_feat:Tensor, style_feat:Tensor):
     """
     Adaptive instance normalization.
@@ -113,7 +111,6 @@ def adaptive_instance_normalization(content_feat:Tensor, style_feat:Tensor):
 
 
 # Function for wavelet blur
-#@torch.jit.script
 def wavelet_blur(image: Tensor, radius: int):
     """
     Apply wavelet blur to the input tensor.
@@ -138,7 +135,6 @@ def wavelet_blur(image: Tensor, radius: int):
 
 
 # Function for wavelet decomposition
-#@torch.jit.script
 def wavelet_decomposition(image: Tensor, levels=5):
     """
     Apply wavelet decomposition to the input tensor.
@@ -156,7 +152,6 @@ def wavelet_decomposition(image: Tensor, levels=5):
 
 
 # Function for wavelet reconstruction
-#@torch.jit.script
 def wavelet_reconstruction(content_feat:Tensor, style_feat:Tensor):
     """
     Apply wavelet decomposition, so that the content will have the same color as the style.
