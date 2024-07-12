@@ -21,9 +21,6 @@ from torch.nn import functional as F
 from torchvision.transforms.v2 import ToTensor, ToPILImage
 
 
-# Check if CUDA (GPU acceleration) is available and set the device accordingly
-#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 
 # Main function for AdaIN color matching
 def adain_color_match(target: Image, source: Image):

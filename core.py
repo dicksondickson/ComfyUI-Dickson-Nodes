@@ -19,7 +19,7 @@ from PIL import Image
 
 # Color Match
 from .modules.colormatch import adain_color_match, wavelet_color_match # standard original
-#from .modules.colormatch_accelerate import adain_color_match, wavelet_color_match # accelerated
+
 from .modules.util import pil2tensor, tensor2pil
 
 
