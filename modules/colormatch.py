@@ -79,36 +79,25 @@ def wavelet_color_match(target: Tensor, source: Tensor):
     print("[DICKSON-NODES] wavelet_color_match")
     
     
-    # Get the dimensions of the target image
-    target_height, target_width = target.shape[-2:]
     
-    #source = source.resize(target.size, resample=Image.Resampling.LANCZOS)
+    source = source.resize(target.size, resample=Image.Resampling.LANCZOS)
     
-    # Create a resize transform
-    resize_transform = Resize((target_height, target_width), 
-                          interpolation=InterpolationMode.BICUBIC, 
-                          antialias=True)
 
-    # Apply the resize transform
-    source = resize_transform(source)
     
-    # Debug
-    print(f"Target size: {target_width}x{target_height}")
-    print(f"Resized source size: {source.shape[-1]}x{source.shape[-2]}")
 
     # Convert images to tensors
-    #to_tensor = ToTensor()
-    #target_tensor = to_tensor(target).unsqueeze(0)
-    #source_tensor = to_tensor(source).unsqueeze(0)
+    to_tensor = ToTensor()
+    target_tensor = to_tensor(target).unsqueeze(0)
+    source_tensor = to_tensor(source).unsqueeze(0)
 
     # Apply wavelet reconstruction
-    #result_tensor = wavelet_reconstruction(target_tensor, source_tensor)
-    result_tensor = wavelet_reconstruction(target, source)
+    result_tensor = wavelet_reconstruction(target_tensor, source_tensor)
+
 
     # Convert tensor back to image
-    #to_image = ToPILImage()
-    #result_image = to_image(result_tensor.squeeze(0).clamp_(0.0, 1.0))
-    result_image = result_tensor.squeeze(0).clamp_(0.0, 1.0)
+    to_image = ToPILImage()
+    result_image = to_image(result_tensor.squeeze(0).clamp_(0.0, 1.0))
+    #result_image = result_tensor.squeeze(0).clamp_(0.0, 1.0)
 
     return result_image
 
