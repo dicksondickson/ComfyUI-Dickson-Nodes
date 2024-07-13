@@ -9,7 +9,7 @@ from torch import Tensor
 
 
 # Python Imaging Library for image operations
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 # PyTorch's functional API for neural network operations
@@ -23,7 +23,7 @@ from torchvision.transforms.v2 import ToTensor, ToPILImage
 
 # From util
 import numpy as np
-import PIL.Image as Image
+#import PIL.Image as Image
 
 
 
