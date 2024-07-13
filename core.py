@@ -68,7 +68,7 @@ class DicksonLoadImage:
         #print(image)
         #filename = os.path.splitext(os.path.basename(image_path))[0]
         filename = image.rsplit('.', 1)[0]
-        print(filename)
+        #print(filename)
         
         img = node_helpers.pillow(Image.open, image_path)
         
