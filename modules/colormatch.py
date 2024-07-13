@@ -19,7 +19,7 @@ from torch.nn import functional as F
 # Transformations for image processing
 #from torchvision.transforms import ToTensor, ToPILImage
 # from torchvision.transforms.v2 import ToTensor, ToPILImage
-from torchvision.transforms.v2 import ToTensor, ToPILImage, Resize, InterpolationMode
+from torchvision.transforms.v2 import ToTensor, ToPILImage
 
 #import torchvision.transforms.v2.functional as TF
 
@@ -77,24 +77,34 @@ def adain_color_match(target: Image, source: Image):
 def wavelet_color_match(target: Image, source: Image):
     print("[DICKSON-NODES] wavelet_color_match")
     
+    # Check if CUDA is available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"[DICKSON-NODES] Using device: {device}")
+    
     
     source = source.resize(target.size, resample=Image.Resampling.LANCZOS)
     
 
     # Convert images to tensors
     to_tensor = ToTensor()
-    target_tensor = to_tensor(target).unsqueeze(0)
-    source_tensor = to_tensor(source).unsqueeze(0)
+    #target_tensor = to_tensor(target).unsqueeze(0)
+    #source_tensor = to_tensor(source).unsqueeze(0)
+    target_tensor = to_tensor(target).unsqueeze(0).to(device)
+    source_tensor = to_tensor(source).unsqueeze(0).to(device)
 
 
     # Apply wavelet reconstruction
     result_tensor = wavelet_reconstruction(target_tensor, source_tensor)
 
 
+    # Move result back to CPU for image conversion
+    result_tensor = result_tensor.cpu()
+
+
     # Convert tensor back to image
     to_image = ToPILImage()
     result_image = to_image(result_tensor.squeeze(0).clamp_(0.0, 1.0))
-    #result_image = result_tensor.squeeze(0).clamp_(0.0, 1.0)
+
 
     return result_image
 
@@ -136,12 +146,21 @@ def adaptive_instance_normalization(content_feat:Tensor, style_feat:Tensor):
     return normalized_feat * style_std.expand(size) + style_mean.expand(size) # Apply style's mean and std to normalized content
 
 
+
 # Function for wavelet blur
 def wavelet_blur(image: Tensor, radius: int):
     """
     Apply wavelet blur to the input tensor.
     """
     print("[DICKSON-NODES] wavelet_blur")
+    
+    
+    # Ensure the image is on the correct device
+    device = image.device
+    print(f"[DICKSON-NODES] Using device: {device}")
+    
+    
+    
     # input shape: (1, 3, H, W)
     # convolution kernel
     kernel_vals = [
@@ -154,10 +173,16 @@ def wavelet_blur(image: Tensor, radius: int):
     kernel = kernel[None, None]
     # repeat the kernel across all input channels
     kernel = kernel.repeat(3, 1, 1, 1)
-    image = F.pad(image, (radius, radius, radius, radius), mode='replicate')  # Pad image
+    
+    # Pad image
+    image = F.pad(image, (radius, radius, radius, radius), mode='replicate')  
+    
     # apply convolution
     output = F.conv2d(image, kernel, groups=3, dilation=radius)
+    
     return output
+
+
 
 
 # Function for wavelet decomposition
