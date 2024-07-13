@@ -67,8 +67,12 @@ class DicksonColorMatch:
             wavelet_color_match if color_match_mode == "Wavelet" else adain_color_match
         )
                 
-        result_image = color_match_func(tensor2pil(image), tensor2pil(color_ref_image))
-        refined_image = pil2tensor(result_image)
+        #result_image = color_match_func(tensor2pil(image), tensor2pil(color_ref_image))
+        result_image = color_match_func(image, color_ref_image)
+        
+        
+        #refined_image = pil2tensor(result_image)
+        refined_image = result_image
         
         
         # Benchmark time
