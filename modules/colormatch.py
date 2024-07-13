@@ -181,15 +181,18 @@ def wavelet_blur(image: Tensor, radius: int):
     """
     Apply wavelet blur to the input tensor.
     """
+    # Print a message to indicate the function has been called
     print("[DICKSON-NODES] wavelet_blur")
     
     
+    # Get the device (CPU or GPU) that the input image is on
     # Ensure the image is on the correct device
     device = image.device
     print(f"[DICKSON-NODES] Using device: {device}")
     
     
     
+    # Define the blur kernel values
     # input shape: (1, 3, H, W)
     # convolution kernel
     kernel_vals = [
@@ -197,18 +200,30 @@ def wavelet_blur(image: Tensor, radius: int):
         [0.125, 0.25, 0.125],
         [0.0625, 0.125, 0.0625],
     ]
+    
+    
+    # Convert the kernel values to a PyTorch tensor on the same device as the input image
     kernel = torch.tensor(kernel_vals, dtype=image.dtype, device=image.device)
+    
+    
+    # Add two dimensions to the kernel to make it a 4D tensor (required for conv2d)
     # add channel dimensions to the kernel to make it a 4D tensor
     kernel = kernel[None, None]
+    
+    
+    # Repeat the kernel for each input channel (assuming 3 channels: R, G, B)
     # repeat the kernel across all input channels
     kernel = kernel.repeat(3, 1, 1, 1)
     
-    # Pad image
+    
+    # Pad the input image to maintain size after convolution
     image = F.pad(image, (radius, radius, radius, radius), mode='replicate')  
     
-    # apply convolution
+    
+    # Apply convolution to blur the image
     output = F.conv2d(image, kernel, groups=3, dilation=radius)
     
+    # Return the blurred image
     return output
 
 
@@ -221,14 +236,28 @@ def wavelet_decomposition(image: Tensor, levels=5):
     This function only returns the low frequency & the high frequency.
     """
     print("[DICKSON-NODES] wavelet_decomposition")
+    
+    # Initialize high_freq tensor with zeros, same shape as input image
     high_freq = torch.zeros_like(image)
+    
+    # Iterate through each level of decomposition
     for i in range(levels):
+        # Calculate the blur radius for this level
         radius = 2 ** i
+        
+        # Apply wavelet blur to get low frequency component
         low_freq = wavelet_blur(image, radius)
+        
+        # Calculate and accumulate high frequency component
         high_freq += (image - low_freq)
+        
+        # Update image for next iteration
         image = low_freq
 
+    # Return high frequency and low frequency components
     return high_freq, low_freq
+
+
 
 
 # Function for wavelet reconstruction
