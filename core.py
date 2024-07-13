@@ -18,9 +18,10 @@ from PIL import Image
 
 
 # Color Match
-from .modules.colormatch import adain_color_match, wavelet_color_match # standard original
+# standard original
+from .modules.colormatch import adain_color_match, wavelet_color_match, pil2tensor, tensor2pil 
 
-from .modules.util import pil2tensor, tensor2pil
+#from .modules.util import pil2tensor, tensor2pil
 
 
 # TT Planet Controlnet Preprocessor
@@ -58,6 +59,13 @@ class DicksonColorMatch:
         result_image = color_match_func(tensor2pil(image), tensor2pil(color_ref_image))
         refined_image = pil2tensor(result_image)
         return (refined_image,)
+
+
+
+
+
+
+
 
 
 # ========= TTPlanet ========= #

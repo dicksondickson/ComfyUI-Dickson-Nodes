@@ -9,7 +9,7 @@ from torch import Tensor
 
 
 # Python Imaging Library for image operations
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 # PyTorch's functional API for neural network operations
@@ -19,6 +19,28 @@ from torch.nn import functional as F
 # Transformations for image processing
 #from torchvision.transforms import ToTensor, ToPILImage
 from torchvision.transforms.v2 import ToTensor, ToPILImage
+
+
+# From util
+import numpy as np
+#import PIL.Image as Image
+
+
+
+
+# ========= pil2tensor ========= #
+def pil2tensor(image):
+    print("[DICKSON-NODES] pil2tensor")
+    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
+
+
+
+# ========= tensor2pil ========= #
+def tensor2pil(image):
+    print("[DICKSON-NODES] tensor2pil")
+    return Image.fromarray(
+        np.clip(255.0 * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8)
+    )
 
 
 
