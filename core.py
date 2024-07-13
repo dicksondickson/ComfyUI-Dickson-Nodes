@@ -71,8 +71,8 @@ class DicksonColorMatch:
         #result_image = color_match_func(image, color_ref_image)
         
         
-        #refined_image = pil2tensor(result_image)
-        refined_image = result_image
+        refined_image = pil2tensor(result_image)
+        #refined_image = result_image
         
         
         # Benchmark time

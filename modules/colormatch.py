@@ -86,6 +86,7 @@ def wavelet_color_match(target: Image, source: Image):
     target_tensor = to_tensor(target).unsqueeze(0)
     source_tensor = to_tensor(source).unsqueeze(0)
 
+
     # Apply wavelet reconstruction
     result_tensor = wavelet_reconstruction(target_tensor, source_tensor)
 
