@@ -74,12 +74,10 @@ def adain_color_match(target: Image, source: Image):
 
 
 # Main function for wavelet color matching
-# def wavelet_color_match(target: Image, source: Image):
-def wavelet_color_match(target: Tensor, source: Tensor):
+def wavelet_color_match(target: Image, source: Image):
     print("[DICKSON-NODES] wavelet_color_match")
     
     
-    source = tensor2pil(source)
     source = source.resize(target.size, resample=Image.Resampling.LANCZOS)
     
 
