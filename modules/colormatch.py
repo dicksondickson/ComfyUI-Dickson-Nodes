@@ -129,11 +129,13 @@ def wavelet_color_match(target: Image, source: Image):
     to_image = ToPILImage()
     
     # Convert the result tensor to a PIL Image, removing the batch dimension and clamping values between 0 and 1
-    #result_image = to_image(result_tensor.squeeze(0).clamp_(0.0, 1.0))
-    result_image = to_image(result_tensor.squeeze(0))
+    result_image = to_image(result_tensor.squeeze(0).clamp_(0.0, 1.0))
 
 
     return result_image
+
+
+
 
 
 # Function to calculate mean and standard deviation of a tensor
