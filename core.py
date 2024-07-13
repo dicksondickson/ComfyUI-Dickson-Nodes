@@ -15,7 +15,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
-
+import time
+#import sys
 
 # Color Match
 # standard original
@@ -32,6 +33,7 @@ from .modules.ttplanetcontrolnet import tensor2pil_tt, apply_gaussian_blur, appl
 # ========= Dickson Color Match ========= #
 
 class DicksonColorMatch:
+    CATEGORY = "Dickson-Nodes/Color"
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -49,15 +51,35 @@ class DicksonColorMatch:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "match_color"
-    CATEGORY = "Dickson-Nodes/Color"
+    
 
+    # Color Match Func
     def match_color(self, image, color_ref_image, color_match_mode):
+        
+        
+        print("[DICKSON-NODES] DicksonColorMatch")
+        
+        
+        # Benchmark time
+        start_time = time.time()
+        
         color_match_func = (
             wavelet_color_match if color_match_mode == "Wavelet" else adain_color_match
         )
-        print("[DICKSON-NODES] DicksonColorMatch")
+                
         result_image = color_match_func(tensor2pil(image), tensor2pil(color_ref_image))
+        #result_image = color_match_func(image, color_ref_image)
+        
+        
         refined_image = pil2tensor(result_image)
+        #refined_image = result_image
+        
+        
+        # Benchmark time
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"[DICKSON-NODES] Execution time: {execution_time:.4f} seconds\n")
+        
         return (refined_image,)
 
 

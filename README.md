@@ -4,7 +4,9 @@ This is a set of custom nodes that I've either written myself or adapted from ot
 
 
 # Changelog  
-7-9-2024: Accelerate code for ColorMatch node not working on all setups. Reverted back.
+v1.0.4 - ColorMatch node is now 15x to 17x faster.  
+v1.0.0 - Release.  
+
 
 
 # Nodes  
