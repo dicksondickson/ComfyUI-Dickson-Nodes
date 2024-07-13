@@ -359,6 +359,7 @@ class TTPlanet_Tile_Preprocessor_cufoff:
 
 NODE_CLASS_MAPPINGS = {
     "DicksonColorMatch": DicksonColorMatch,
+    "DicksonLoadImage": DicksonLoadImage,
     "TTPlanet_Tile_Preprocessor_GF": TTPlanet_Tile_Preprocessor_GF,
     "TTPlanet_Tile_Preprocessor_Simple": TTPlanet_Tile_Preprocessor_Simple,
     "TTPlanet_Tile_Preprocessor_cufoff": TTPlanet_Tile_Preprocessor_cufoff
@@ -366,6 +367,7 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "DicksonColorMatch": "Dickson Color Match",
+    "DicksonLoadImage": "Dickson Load Image",
     "TTPlanet_Tile_Preprocessor_GF": "🪐TTPlanet Tile Preprocessor GF",
     "TTPlanet_Tile_Preprocessor_Simple": "🪐TTPlanet Tile Preprocessor Simple",
     "TTPlanet_Tile_Preprocessor_cufoff": "🪐TTPlanet Tile Preprocessor cufoff"
