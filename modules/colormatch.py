@@ -79,8 +79,8 @@ def wavelet_color_match(target: Tensor, source: Tensor):
     print("[DICKSON-NODES] wavelet_color_match")
     
     
-    t_source = tensor2pil(source)
-    source = t_source.resize(target.size, resample=Image.Resampling.LANCZOS)
+    source = tensor2pil(source)
+    source = source.resize(target.size, resample=Image.Resampling.LANCZOS)
     
 
     # Convert images to tensors
