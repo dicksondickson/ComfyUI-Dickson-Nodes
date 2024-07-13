@@ -21,6 +21,7 @@ from torch.nn import functional as F
 # from torchvision.transforms.v2 import ToTensor, ToPILImage
 from torchvision.transforms.v2 import ToTensor, ToPILImage, Resize, InterpolationMode
 
+#import torchvision.transforms.v2.functional as TF
 
 # From util
 import numpy as np
@@ -85,7 +86,7 @@ def wavelet_color_match(target: Tensor, source: Tensor):
     
     # Create a resize transform
     resize_transform = Resize((target_height, target_width), 
-                          interpolation=InterpolationMode.LANCZOS, 
+                          interpolation=InterpolationMode.BICUBIC, 
                           antialias=True)
 
     # Apply the resize transform
