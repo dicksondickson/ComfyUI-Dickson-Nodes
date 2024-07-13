@@ -66,9 +66,8 @@ class DicksonLoadImage:
         
         image_path = folder_paths.get_annotated_filepath(image)
         print(image_path)
+        print(image)
         filename = os.path.splitext(os.path.basename(image_path))[0]
-        #filename = os.path.splitext(os.path.basename(path))[0]
-        #filename = image_path.rsplit('/',1)[-1]
         print(filename)
         
         img = node_helpers.pillow(Image.open, image_path)
