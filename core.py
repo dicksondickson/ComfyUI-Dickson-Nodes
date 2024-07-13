@@ -18,9 +18,10 @@ from PIL import Image
 
 
 # Color Match
-from .modules.colormatch import adain_color_match, wavelet_color_match # standard original
+# standard original
+from .modules.colormatch import adain_color_match, wavelet_color_match, pil2tensor, tensor2pil 
 
-from .modules.util import pil2tensor, tensor2pil
+#from .modules.util import pil2tensor, tensor2pil
 
 
 # TT Planet Controlnet Preprocessor
