@@ -7,26 +7,135 @@
 """
 
 import os
+import time
+
 
 import torch
 from torch import Tensor
 
+
 import cv2
 import numpy as np
-from PIL import Image
 
-import time
-#import sys
 
-# Color Match
-# standard original
+from PIL import Image, ImageOps, ImageSequence, ImageFile
+from PIL.PngImagePlugin import PngInfo
+
+
+# Image Load
+import folder_paths
+import latent_preview
+import node_helpers
+
+
+# Color Match Functions
 from .modules.colormatch import adain_color_match, wavelet_color_match, pil2tensor, tensor2pil 
-
-#from .modules.util import pil2tensor, tensor2pil
 
 
 # TT Planet Controlnet Preprocessor
 from .modules.ttplanetcontrolnet import tensor2pil_tt, apply_gaussian_blur, apply_guided_filter
+
+
+
+
+
+
+# ========= Dickson Image Load ========= #
+
+
+
+class DicksonLoadImage:
+    @classmethod
+    def INPUT_TYPES(s):
+        input_dir = folder_paths.get_input_directory()
+        files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
+        return {"required":
+                    {"image": (sorted(files), {"image_upload": True})},
+                }
+
+    CATEGORY = "Dickson-Nodes/Image"
+
+    #RETURN_TYPES = ("IMAGE", "MASK")
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT",)
+    RETURN_NAMES = ("IMAGE", "MASK", "filename","width","height",)
+    
+    
+    FUNCTION = "load_image"
+    
+    def load_image(self, image):
+        
+        image_path = folder_paths.get_annotated_filepath(image)
+        #print(image)
+        #filename = os.path.splitext(os.path.basename(image_path))[0]
+        filename = image.rsplit('.', 1)[0]
+        #print(filename)
+        
+        img = node_helpers.pillow(Image.open, image_path)
+        
+        output_images = []
+        output_masks = []
+        w, h = None, None
+        
+        
+
+        excluded_formats = ['MPO']
+        
+        for i in ImageSequence.Iterator(img):
+            i = node_helpers.pillow(ImageOps.exif_transpose, i)
+
+            if i.mode == 'I':
+                i = i.point(lambda i: i * (1 / 255))
+            image = i.convert("RGB")
+
+            if len(output_images) == 0:
+                w = image.size[0]
+                h = image.size[1]
+            
+            if image.size[0] != w or image.size[1] != h:
+                continue
+            
+            image = np.array(image).astype(np.float32) / 255.0
+            image = torch.from_numpy(image)[None,]
+            
+            
+            # get image size
+            shape = image.shape
+            width = shape[2]
+            height = shape[1]
+            
+            
+            if 'A' in i.getbands():
+                mask = np.array(i.getchannel('A')).astype(np.float32) / 255.0
+                mask = 1. - torch.from_numpy(mask)
+            else:
+                mask = torch.zeros((64,64), dtype=torch.float32, device="cpu")
+            output_images.append(image)
+            output_masks.append(mask.unsqueeze(0))
+
+        if len(output_images) > 1 and img.format not in excluded_formats:
+            output_image = torch.cat(output_images, dim=0)
+            output_mask = torch.cat(output_masks, dim=0)
+        else:
+            output_image = output_images[0]
+            output_mask = output_masks[0]
+
+        return (output_image, output_mask, filename, width, height,)
+
+    @classmethod
+    def IS_CHANGED(s, image):
+        image_path = folder_paths.get_annotated_filepath(image)
+        m = hashlib.sha256()
+        with open(image_path, 'rb') as f:
+            m.update(f.read())
+        return m.digest().hex()
+
+    @classmethod
+    def VALIDATE_INPUTS(s, image):
+        if not folder_paths.exists_annotated_filepath(image):
+            return "Invalid image file: {}".format(image)
+
+        return True
+
 
 
 
@@ -252,6 +361,7 @@ class TTPlanet_Tile_Preprocessor_cufoff:
 
 NODE_CLASS_MAPPINGS = {
     "DicksonColorMatch": DicksonColorMatch,
+    "DicksonLoadImage": DicksonLoadImage,
     "TTPlanet_Tile_Preprocessor_GF": TTPlanet_Tile_Preprocessor_GF,
     "TTPlanet_Tile_Preprocessor_Simple": TTPlanet_Tile_Preprocessor_Simple,
     "TTPlanet_Tile_Preprocessor_cufoff": TTPlanet_Tile_Preprocessor_cufoff
@@ -259,6 +369,7 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "DicksonColorMatch": "Dickson Color Match",
+    "DicksonLoadImage": "Dickson Load Image",
     "TTPlanet_Tile_Preprocessor_GF": "🪐TTPlanet Tile Preprocessor GF",
     "TTPlanet_Tile_Preprocessor_Simple": "🪐TTPlanet Tile Preprocessor Simple",
     "TTPlanet_Tile_Preprocessor_cufoff": "🪐TTPlanet Tile Preprocessor cufoff"
