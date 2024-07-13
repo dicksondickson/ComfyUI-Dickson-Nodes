@@ -79,7 +79,7 @@ def wavelet_color_match(target: Tensor, source: Tensor):
     print("[DICKSON-NODES] wavelet_color_match")
     
     
-    
+    source = tensor2pil(source)
     source = source.resize(target.size, resample=Image.Resampling.LANCZOS)
     
 
