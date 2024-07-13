@@ -75,21 +75,45 @@ def adain_color_match(target: Image, source: Image):
 
 # Main function for wavelet color matching
 def wavelet_color_match(target: Image, source: Image):
+    
+    # Print a message to indicate the function has been called
     print("[DICKSON-NODES] wavelet_color_match")
     
     # Check if CUDA is available
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    
+    # Check for available GPU devices
+    if torch.cuda.is_available():
+        # If CUDA (NVIDIA GPU) is available, use it
+        device = torch.device("cuda")
+    elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+        # If MPS (Apple Silicon GPU) is available, use it
+        device = torch.device("mps")
+    else:
+        # If no GPU is available, use CPU
+        device = torch.device("cpu")
+        
+    
+    # Print which device (CPU or GPU) is being used
     print(f"[DICKSON-NODES] Using device: {device}")
     
     
+    
+    # Resize the source image to match the target image size
     source = source.resize(target.size, resample=Image.Resampling.LANCZOS)
     
 
-    # Convert images to tensors
+    # Create a function to convert PIL Images to PyTorch tensors
     to_tensor = ToTensor()
+    
     #target_tensor = to_tensor(target).unsqueeze(0)
     #source_tensor = to_tensor(source).unsqueeze(0)
+
+    # Convert target image to tensor, add a batch dimension, and move to the selected device
     target_tensor = to_tensor(target).unsqueeze(0).to(device)
+    
+    # Convert source image to tensor, add a batch dimension, and move to the selected device
     source_tensor = to_tensor(source).unsqueeze(0).to(device)
 
 
@@ -97,13 +121,16 @@ def wavelet_color_match(target: Image, source: Image):
     result_tensor = wavelet_reconstruction(target_tensor, source_tensor)
 
 
-    # Move result back to CPU for image conversion
+    # Move the result tensor back to CPU for image conversion
     result_tensor = result_tensor.cpu()
 
 
-    # Convert tensor back to image
+    # Create a function to convert PyTorch tensors back to PIL Images
     to_image = ToPILImage()
-    result_image = to_image(result_tensor.squeeze(0).clamp_(0.0, 1.0))
+    
+    # Convert the result tensor to a PIL Image, removing the batch dimension and clamping values between 0 and 1
+    #result_image = to_image(result_tensor.squeeze(0).clamp_(0.0, 1.0))
+    result_image = to_image(result_tensor.squeeze(0))
 
 
     return result_image
