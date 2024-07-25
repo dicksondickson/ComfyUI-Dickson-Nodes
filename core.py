@@ -130,7 +130,7 @@ class DicksonLoadImage:
     
         return {
             "ui": {
-                "text": (imageSizeStr,)
+                "text": (imageSizeStr)
             },
             "result": (
                 output_image,
