@@ -49,9 +49,12 @@ class DicksonLoadImage:
     def INPUT_TYPES(s):
         input_dir = folder_paths.get_input_directory()
         files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
-        return {"required":
-                    {"image": (sorted(files), {"image_upload": True})},
-                }
+        return {
+            "required": {
+                "image": (sorted(files), {"image_upload": True}),
+                #"text": ("STRING", {"forceInput": True}),
+                },
+        }
 
     CATEGORY = "Dickson-Nodes/Image"
 
@@ -102,7 +105,8 @@ class DicksonLoadImage:
             shape = image.shape
             width = shape[2]
             height = shape[1]
-            imageSize = f"Width: {height} \n Height: {width}"
+            imageSizeStr = f"Width: {height} \n Height: {width}"
+            imageSize = {"ui": {"text": imageSizeStr}, "result": (imageSizeStr,)}
             
             
             if 'A' in i.getbands():
