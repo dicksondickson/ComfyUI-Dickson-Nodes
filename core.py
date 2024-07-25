@@ -54,9 +54,6 @@ class DicksonLoadImage:
                 "image": (sorted(files), {"image_upload": True}),
                 "text": ("STRING", {"forceInput": True}),
                 },
-            "hidden": {
-                "text": ("STRING", {"forceInput": True}),
-                },
         }
 
     CATEGORY = "Dickson-Nodes/Image"
