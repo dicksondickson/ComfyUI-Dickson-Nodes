@@ -17,11 +17,8 @@ from torch.nn import functional as F
 
 
 # Transformations for image processing
-#from torchvision.transforms import ToTensor, ToPILImage
-# from torchvision.transforms.v2 import ToTensor, ToPILImage
 from torchvision.transforms.v2 import ToTensor, ToPILImage
 
-#import torchvision.transforms.v2.functional as TF
 
 # From util
 import numpy as np
