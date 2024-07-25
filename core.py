@@ -138,7 +138,6 @@ class DicksonLoadImage:
                 filename,
                 width,
                 height,
-                #imageSizeStr,
             ),
         }
     
