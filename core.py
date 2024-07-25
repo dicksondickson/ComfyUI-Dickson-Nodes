@@ -120,7 +120,7 @@ class DicksonLoadImage:
             output_image = output_images[0]
             output_mask = output_masks[0]
 
-        return (output_image, output_mask, filename, width, height, {"ui": {"Image Size": imageSize},"result": (imageSize,)},)
+        return (output_image, output_mask, filename, width, height, imageSize,)
 
     @classmethod
     def IS_CHANGED(s, image):
