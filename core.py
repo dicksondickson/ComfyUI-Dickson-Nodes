@@ -106,7 +106,7 @@ class DicksonLoadImage:
             width = shape[2]
             height = shape[1]
             imageSizeStr = f"Width: {height} \n Height: {width}"
-            imageSize = {"ui": {"text": imageSizeStr}, "result": (imageSizeStr,)}
+            imageSize = f'{{"ui": {{"text": {imageSizeStr}}}, "result": ({imageSizeStr},)}}'
             
             
             if 'A' in i.getbands():
