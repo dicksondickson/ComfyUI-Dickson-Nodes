@@ -52,7 +52,6 @@ class DicksonLoadImage:
         return {
             "required": {
                 "image": (sorted(files), {"image_upload": True}),
-                "text": ("STRING", {"forceInput": True}),
                 },
         }
 
