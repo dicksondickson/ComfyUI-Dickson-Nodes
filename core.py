@@ -58,10 +58,10 @@ class DicksonLoadImage:
     CATEGORY = "Dickson-Nodes/Image"
 
     #RETURN_TYPES = ("IMAGE", "MASK")
-    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT",)
-    RETURN_NAMES = ("IMAGE", "MASK", "filename", "width", "height",)
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT", "STRING")
+    RETURN_NAMES = ("IMAGE", "MASK", "filename", "width", "height", "imageSizeString")
     
-    OUTPUT_NODE = True
+    #OUTPUT_NODE = True
     #OUTPUT_IS_LIST = (False, False, False, False, False, True,)
     
     
@@ -107,7 +107,7 @@ class DicksonLoadImage:
             shape = image.shape
             width = shape[2]
             height = shape[1]
-            imageSizeStr = f"Width: {height} \n Height: {width}"
+            imageSizeString = f"Width: {height}\nHeight: {width}"
             #imageSize = {"ui": {"text": imageSizeStr}, "result": (imageSizeStr,)}
             
             
@@ -130,7 +130,7 @@ class DicksonLoadImage:
     
         return {
             "ui": {
-                "text": imageSizeStr
+                "text": imageSizeString
             },
             "result": (
                 output_image,
@@ -138,6 +138,7 @@ class DicksonLoadImage:
                 filename,
                 width,
                 height,
+                imageSizeString,
             ),
         }
     
