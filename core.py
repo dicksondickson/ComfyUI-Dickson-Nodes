@@ -52,7 +52,7 @@ class DicksonLoadImage:
         return {
             "required": {
                 "image": (sorted(files), {"image_upload": True}),
-                #"text": ("STRING", {"forceInput": True}),
+                "text": ("STRING", {"forceInput": True}),
                 },
         }
 
@@ -63,7 +63,7 @@ class DicksonLoadImage:
     RETURN_NAMES = ("IMAGE", "MASK", "filename", "width", "height", "imageSize",)
     
     #OUTPUT_NODE = True
-    OUTPUT_IS_LIST = (False, False, False, False, False, True,)
+    #OUTPUT_IS_LIST = (False, False, False, False, False, True,)
     
     
     FUNCTION = "load_image"
