@@ -59,7 +59,7 @@ class DicksonLoadImage:
 
     #RETURN_TYPES = ("IMAGE", "MASK")
     RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT", "STRING",)
-    RETURN_NAMES = ("IMAGE", "MASK", "filename", "width", "height", "imageSizeStr",)
+    RETURN_NAMES = ("IMAGE", "MASK", "filename", "width", "height",)
     
     OUTPUT_NODE = True
     #OUTPUT_IS_LIST = (False, False, False, False, False, True,)
