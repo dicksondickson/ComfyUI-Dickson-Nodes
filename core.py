@@ -58,7 +58,7 @@ class DicksonLoadImage:
     CATEGORY = "Dickson-Nodes/Image"
 
     #RETURN_TYPES = ("IMAGE", "MASK")
-    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT", "STRING",)
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT",)
     RETURN_NAMES = ("IMAGE", "MASK", "filename", "width", "height",)
     
     OUTPUT_NODE = True
