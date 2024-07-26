@@ -49,15 +49,20 @@ class DicksonLoadImage:
     def INPUT_TYPES(s):
         input_dir = folder_paths.get_input_directory()
         files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
-        return {"required":
-                    {"image": (sorted(files), {"image_upload": True})},
-                }
+        return {
+            "required": {
+                "image": (sorted(files), {"image_upload": True}),
+                },
+        }
 
     CATEGORY = "Dickson-Nodes/Image"
 
     #RETURN_TYPES = ("IMAGE", "MASK")
-    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT",)
-    RETURN_NAMES = ("IMAGE", "MASK", "filename","width","height",)
+    RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT","INT", "STRING")
+    RETURN_NAMES = ("IMAGE", "MASK", "FILENAME", "IMAGE WIDTH INT", "IMAGE HEIGHT INT", "IMAGE INFO")
+    
+    #OUTPUT_NODE = True
+    #OUTPUT_IS_LIST = (False, False, False, False, False, True,)
     
     
     FUNCTION = "load_image"
@@ -102,6 +107,8 @@ class DicksonLoadImage:
             shape = image.shape
             width = shape[2]
             height = shape[1]
+            imageSizeString = f"Width: {height}\nHeight: {width}"
+            #imageSize = {"ui": {"text": imageSizeStr}, "result": (imageSizeStr,)}
             
             
             if 'A' in i.getbands():
@@ -119,7 +126,25 @@ class DicksonLoadImage:
             output_image = output_images[0]
             output_mask = output_masks[0]
 
-        return (output_image, output_mask, filename, width, height,)
+        return (output_image, output_mask, filename, width, height, imageSizeString,)
+    
+        """
+        return {
+            "ui": {
+                "text": imageSizeString
+            },
+            "result": (
+                output_image,
+                output_mask,
+                filename,
+                width,
+                height,
+                imageSizeString,
+            ),
+        }
+        """
+    
+    
 
     @classmethod
     def IS_CHANGED(s, image):

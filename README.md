@@ -4,6 +4,7 @@ This is a set of custom nodes that I've either written myself or adapted from ot
 
 
 # Changelog  
+v1.0.6 - Add image info output to imageload node.
 v1.0.5 - Added ImageLoad node - provides filename and image width and height as integer.  
 v1.0.4 - ColorMatch node is now 15x to 17x faster.   
 v1.0.0 - Release.   
@@ -20,7 +21,10 @@ Credit to: WSJUSA, StableSR, LIightChaser and Jianyi Wang
 Forked from [https://huggingface.co/TTPlanet/TTPLanet_SDXL_Controlnet_Tile_Realistic](https://huggingface.co/TTPlanet/TTPLanet_SDXL_Controlnet_Tile_Realistic) for my own convienence.
 TTPlanet's Controlnet model is meant to be used with this node which you can download on his Huggingface repo.
 Credit to: Aaron Xie / TTPlanet  
-  
+
+**Image Load Node**  
+Provides filename output as string, image width and height as integer output, and image info output as string.   
+
 
 
 # Installation  
