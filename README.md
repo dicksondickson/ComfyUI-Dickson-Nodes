@@ -4,7 +4,7 @@ This is a set of custom nodes that I've either written myself or adapted from ot
 
 
 # Changelog  
-v1.0.7 - Chage node names to not conflict with TTPLANET
+v1.0.7 - Change node names to not conflict with TTPLANET.  
 v1.0.6 - Add image info output to imageload node.   
 v1.0.5 - Added ImageLoad node - provides filename and image width and height as integer.  
 v1.0.4 - ColorMatch node is now 15x to 17x faster.   
