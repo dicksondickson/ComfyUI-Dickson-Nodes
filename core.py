@@ -33,7 +33,7 @@ from .modules.colormatch import adain_color_match, wavelet_color_match, pil2tens
 
 
 # TT Planet Controlnet Preprocessor
-from .modules.ttplanetcontrolnet import tensor2pil_tt, apply_gaussian_blur, apply_guided_filter
+from .modules.dicksonttplanetcontrolnet import tensor2pil_tt, apply_gaussian_blur, apply_guided_filter
 
 
 
@@ -226,7 +226,7 @@ class DicksonColorMatch:
 
 # ========= TTPlanet ========= #
 
-class TTPlanet_Tile_Preprocessor_GF:
+class Dickson_TTP_Tile_Preprocessor_GF:
     def __init__(self, blur_strength=3.0, radius=7, eps=0.01):
         self.blur_strength = blur_strength
         self.radius = radius
@@ -248,7 +248,7 @@ class TTPlanet_Tile_Preprocessor_GF:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image_output",)
     FUNCTION = 'process_image'
-    CATEGORY = 'TTP_TILE'
+    CATEGORY = 'DICKSON_TTP_TILE'
 
     def process_image(self, image, scale_factor, blur_strength, radius, eps):
         ret_images = []
@@ -281,7 +281,7 @@ class TTPlanet_Tile_Preprocessor_GF:
         
         return (torch.cat(ret_images, dim=0),)
         
-class TTPlanet_Tile_Preprocessor_Simple:
+class Dickson_TTP_Tile_Preprocessor_Simple:
     def __init__(self, blur_strength=3.0):
         self.blur_strength = blur_strength
 
@@ -299,7 +299,7 @@ class TTPlanet_Tile_Preprocessor_Simple:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image_output",)
     FUNCTION = 'process_image'
-    CATEGORY = 'TTP_TILE'
+    CATEGORY = 'DICKSON_TTP_TILE'
 
     def process_image(self, image, scale_factor, blur_strength):
         ret_images = []
@@ -328,7 +328,7 @@ class TTPlanet_Tile_Preprocessor_Simple:
     
         return (torch.cat(ret_images, dim=0),)        
 
-class TTPlanet_Tile_Preprocessor_cufoff:
+class Dickson_TTP_Tile_Preprocessor_cufoff:
     def __init__(self, blur_strength=3.0, cutoff_frequency=30, filter_strength=1.0):
         self.blur_strength = blur_strength
         self.cutoff_frequency = cutoff_frequency
@@ -350,7 +350,7 @@ class TTPlanet_Tile_Preprocessor_cufoff:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image_output",)
     FUNCTION = 'process_image'
-    CATEGORY = 'TTP_TILE'
+    CATEGORY = 'DICKSON_TTP_TILE'
 
     def process_image(self, image, scale_factor, blur_strength, cutoff_frequency, filter_strength):
         ret_images = []
@@ -387,16 +387,16 @@ class TTPlanet_Tile_Preprocessor_cufoff:
 NODE_CLASS_MAPPINGS = {
     "DicksonColorMatch": DicksonColorMatch,
     "DicksonLoadImage": DicksonLoadImage,
-    "TTPlanet_Tile_Preprocessor_GF": TTPlanet_Tile_Preprocessor_GF,
-    "TTPlanet_Tile_Preprocessor_Simple": TTPlanet_Tile_Preprocessor_Simple,
-    "TTPlanet_Tile_Preprocessor_cufoff": TTPlanet_Tile_Preprocessor_cufoff
+    "Dickson_TTP_Tile_Preprocessor_GF": Dickson_TTP_Tile_Preprocessor_GF,
+    "Dickson_TTP_Preprocessor_Simple": Dickson_TTP_Tile_Preprocessor_Simple,
+    "Dickson_TTP_Preprocessor_cufoff": Dickson_TTP_Tile_Preprocessor_cufoff
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "DicksonColorMatch": "Dickson Color Match",
     "DicksonLoadImage": "Dickson Load Image",
-    "TTPlanet_Tile_Preprocessor_GF": "🪐TTPlanet Tile Preprocessor GF",
-    "TTPlanet_Tile_Preprocessor_Simple": "🪐TTPlanet Tile Preprocessor Simple",
-    "TTPlanet_Tile_Preprocessor_cufoff": "🪐TTPlanet Tile Preprocessor cufoff"
+    "Dickson_TTP_Tile_Preprocessor_GF": "Dickson TTP Tile Preprocessor GF",
+    "Dickson_TTP_Tile_Preprocessor_Simple": "Dickson TTP Tile Preprocessor Simple",
+    "Dickson_TTP_Tile_Preprocessor_cufoff": "Dickson TTP Tile Preprocessor cufoff"
 }
 
