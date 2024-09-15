@@ -248,7 +248,7 @@ class Dickson_TTP_Tile_Preprocessor_GF:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image_output",)
     FUNCTION = 'process_image'
-    CATEGORY = 'DICKSON_TTP_TILE'
+    CATEGORY = 'Dickson-Nodes/ControlNet'
 
     def process_image(self, image, scale_factor, blur_strength, radius, eps):
         ret_images = []
@@ -299,7 +299,7 @@ class Dickson_TTP_Tile_Preprocessor_Simple:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image_output",)
     FUNCTION = 'process_image'
-    CATEGORY = 'DICKSON_TTP_TILE'
+    CATEGORY = 'Dickson-Nodes/ControlNet'
 
     def process_image(self, image, scale_factor, blur_strength):
         ret_images = []
@@ -350,7 +350,7 @@ class Dickson_TTP_Tile_Preprocessor_cufoff:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image_output",)
     FUNCTION = 'process_image'
-    CATEGORY = 'DICKSON_TTP_TILE'
+    CATEGORY = 'Dickson-Nodes/ControlNet'
 
     def process_image(self, image, scale_factor, blur_strength, cutoff_frequency, filter_strength):
         ret_images = []
