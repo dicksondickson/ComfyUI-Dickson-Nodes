@@ -4,6 +4,7 @@ This is a set of custom nodes that I've either written myself or adapted from ot
 
 
 # Changelog  
+v1.0.8 - Fix node name sto show up better in node library.  
 v1.0.7 - Change node names to not conflict with TTPLANET.  
 v1.0.6 - Add image info output to imageload node.   
 v1.0.5 - Added ImageLoad node - provides filename and image width and height as integer.  
