@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-dickson-nodes"
 description = "A set of custom nodes that I've either written myself or adapted from other authors"
-version = "1.0.8"
+version = "1.0.9"
 license = "LICENSE"
 
 [project.urls]

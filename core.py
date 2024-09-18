@@ -107,7 +107,7 @@ class DicksonLoadImage:
             shape = image.shape
             width = shape[2]
             height = shape[1]
-            imageSizeString = f"Width: {height}\nHeight: {width}"
+            imageSizeString = f"Width: {width}\nHeight: {height}"
             #imageSize = {"ui": {"text": imageSizeStr}, "result": (imageSizeStr,)}
             
             
